@@ -1,0 +1,54 @@
+{
+    "input_data": [
+        {
+            "fields": [
+                "ID",
+                "CHECKING_BALANCE",
+                "PAYMENT_TERM",
+                "CREDIT_HISTORY",
+                "LOAN_PURPOSE",
+                "LOAN_AMOUNT",
+                "EXISTING_SAVINGS",
+                "EMPLOYMENT_DURATION",
+                "INSTALLMENT_PERCENT",
+                "SEX",
+                "OTHERS_ON_LOAN",
+                "CURRENT_RESIDENCE_DURATION",
+                "PROPERTY",
+                "AGE",
+                "INSTALLMENT_PLANS",
+                "HOUSING",
+                "EXISTING_CREDITS_COUNT",
+                "JOB_TYPE",
+                "DEPENDENTS",
+                "TELEPHONE",
+                "FOREIGN_WORKER"
+            ],
+            "values": [
+                [
+                    5000,
+                    "NO_CHECKING",
+                    960,
+                    "PRIOR_PAYMENTS_DELAYED                    ",
+                    "CAR_USED",
+                    4400,
+                    "UNKNOWN",
+                    9,
+                    3,
+                    "M",
+                    "CO-APPLICANT",
+                    4,
+                    "CAR_OTHER",
+                    47,
+                    "STORES",
+                    "FREE",
+                    3,
+                    1,
+                    2,
+                    1,
+                    1
+                ]
+            ]
+        }
+    ]
+}

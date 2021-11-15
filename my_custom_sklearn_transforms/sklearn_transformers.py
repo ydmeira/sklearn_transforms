@@ -28,17 +28,29 @@ class EncodeColumns(BaseEstimator, TransformerMixin):
             data[col] = self.enc_col_dict[col].transform(data[col])
         return data
 
-class TransformColumn(BaseEstimator, TransformerMixin):
-    def __init__(self, column, transform_fn):
+class TransformBalanceColumn(BaseEstimator, TransformerMixin):
+    def __init__(self, column):
         self.column = column
-        self.transform_fn = transform_fn
 
     def fit(self, X, y=None):
         return self
 
+    def bin(row):
+        if str(row) in ["NO_CHECKING", "NEGATIVE", "LOW", "HIGH"]:
+            return row
+        val = float(row)
+        if val < 0:
+            return "NEGATIVE"
+        if val >=0 and val <= 200:
+            return "LOW"
+        if val >= 200:
+            return "HIGH"
+        return row
+
     def transform(self, X):
         # Primeiro realizamos a cópia do DataFrame 'X' de entrada
         data = X.copy()
-        data[self.column] = data[self.column].apply(self.transform_fn)
+        
+        data[self.column] = data[self.column].apply(self.bin)
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data
