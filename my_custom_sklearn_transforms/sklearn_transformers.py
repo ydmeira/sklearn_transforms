@@ -27,3 +27,18 @@ class EncodeColumns(BaseEstimator, TransformerMixin):
         for col in self.enc_col_dict.keys():
             data[col] = self.enc_col_dict[col].transform(data[col])
         return data
+
+class TransformColumn(BaseEstimator, TransformerMixin):
+    def __init__(self, column, transform_fn):
+        self.column = column
+        self.transform_fn = transform_fn
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do DataFrame 'X' de entrada
+        data = X.copy()
+        data[self.column] = data[self.column].apply(self.transform_fn)
+        # Retornamos um novo dataframe sem as colunas indesejadas
+        return data
