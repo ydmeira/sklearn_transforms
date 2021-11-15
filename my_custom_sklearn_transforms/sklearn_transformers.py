@@ -35,7 +35,7 @@ class TransformBalanceColumn(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
 
-    def bin(row):
+    def bin(self, row):
         if str(row) in ["NO_CHECKING", "NEGATIVE", "LOW", "HIGH"]:
             return row
         val = float(row)
