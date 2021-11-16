@@ -112,3 +112,24 @@ class TransformEmploymentColumn(BaseEstimator, TransformerMixin):
         data[self.column] = data[self.column].apply(self.bin)
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data
+
+class TransformFloatColumn(BaseEstimator, TransformerMixin):
+    def __init__(self, column):
+        self.column = column
+
+    def fit(self, X, y=None):
+        return self
+
+    def bin(self, row):
+        try:
+            return float(row)
+        except:
+            return 0.0
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do DataFrame 'X' de entrada
+        data = X.copy()
+        
+        data[self.column] = data[self.column].apply(self.bin)
+        # Retornamos um novo dataframe sem as colunas indesejadas
+        return data
