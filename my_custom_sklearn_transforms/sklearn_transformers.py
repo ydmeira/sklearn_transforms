@@ -1,6 +1,6 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 
-
+#TODO! Transform for other categorical columns
 # All sklearn Transforms must have the `transform` and `fit` methods
 class DropColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
@@ -45,6 +45,64 @@ class TransformBalanceColumn(BaseEstimator, TransformerMixin):
             return "LOW"
         if val >= 200:
             return "HIGH"
+        return row
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do DataFrame 'X' de entrada
+        data = X.copy()
+        
+        data[self.column] = data[self.column].apply(self.bin)
+        # Retornamos um novo dataframe sem as colunas indesejadas
+        return data
+
+class TransformSavingsColumn(BaseEstimator, TransformerMixin):
+    def __init__(self, column):
+        self.column = column
+
+    def fit(self, X, y=None):
+        return self
+
+    def bin(self, row):
+        if str(row) in ["UNKNOWN", "LOW", "MEDIUM", "HIGH", "HIGHEST"]:
+            return row
+        val = float(row)
+        if val <= 100:
+            return "LOW"
+        if val > 100 and val <= 500:
+            return "MEDIUM"
+        if val > 500 and val <= 1000:
+            return "HIGH"
+        if val > 1000:
+            return "HIGHEST"
+        return row
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do DataFrame 'X' de entrada
+        data = X.copy()
+        
+        data[self.column] = data[self.column].apply(self.bin)
+        # Retornamos um novo dataframe sem as colunas indesejadas
+        return data
+
+class TransformEmploymentColumn(BaseEstimator, TransformerMixin):
+    def __init__(self, column):
+        self.column = column
+
+    def fit(self, X, y=None):
+        return self
+
+    def bin(self, row):
+        if str(row) in ["LOW", "MEDIUM", "HIGH", "HIGHEST"]:
+            return row
+        val = float(row)
+        if val <= 0:
+            return "LOW"
+        if val > 0 and val <= 4:
+            return "MEDIUM"
+        if val > 4 and val <= 7:
+            return "HIGH"
+        if val > 7:
+            return "HIGHEST"
         return row
 
     def transform(self, X):
